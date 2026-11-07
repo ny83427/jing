@@ -94,3 +94,6 @@ a:hover{text-decoration:underline}
 .trailer{margin:64px 0 0;text-align:center}
 .trailer video{width:100%;border-radius:3px;background:#000;box-shadow:0 10px 30px rgba(0,0,0,.25)}
 .trailer p{color:var(--ink2);letter-spacing:.3em;font-size:14px;margin:10px 0 0}
+.reader figure.fig{margin:2.2em auto;text-align:center}
+.reader figure.fig img{max-width:100%;max-height:85vh;width:auto;box-shadow:0 6px 20px rgba(0,0,0,.22);border-radius:2px}
+.reader figure.fig figcaption{margin-top:.8em;font-size:.72em;line-height:1.7;color:var(--ink2);text-indent:0}

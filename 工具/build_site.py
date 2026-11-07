@@ -40,7 +40,7 @@ def parse(path):
     if m:
         version = re.sub(r"\*\*(.+?)\*\*", r"\1", "版本" + m.group(1)).strip()
         body = body[: m.start()]
-    chars = len(re.findall(r"[一-鿿]", body))
+    chars = len(re.findall(r"[\u4e00-\u9fff]", re.sub(r"!\[[^\]]*\]\([^)]*\)", "", body)))
     return dict(part=part, vol=vol, title=title, body=body, version=version, chars=chars)
 
 
@@ -97,6 +97,12 @@ def main():
     shutil.copy(Path(__file__).parent / "site" / "style.css", OUT / "style.css")
     shutil.copy(Path(__file__).parent / "site" / "app.js", OUT / "app.js")
     (OUT / ".nojekyll").write_text("")
+    fig_src = ROOT / "图片"
+    if fig_src.exists():
+        (OUT / "img" / "fig").mkdir(parents=True, exist_ok=True)
+        for p in fig_src.iterdir():
+            if p.is_file():
+                shutil.copy(p, OUT / "img" / "fig" / p.name)
     trailer = ROOT / "预告片" / "景_预告片.mp4"
     if trailer.exists():
         shutil.copy(trailer, OUT / "trailer.mp4")
@@ -108,6 +114,10 @@ def main():
     for i, c in enumerate(chapters):
         md.reset()
         body_html = md.convert(c["body"])
+        body_html = body_html.replace('src="../图片/', 'src="img/fig/')
+        body_html = re.sub(r'<p><img alt="([^"]*)" src="([^"]+)" ?/?></p>',
+                           r'<figure class="fig"><a href="\2" target="_blank"><img src="\2" alt="\1" loading="lazy"></a><figcaption>\1</figcaption></figure>',
+                           body_html)
         prev_c = chapters[i - 1] if i > 0 else None
         next_c = chapters[i + 1] if i + 1 < len(chapters) else None
         crumbs = " · ".join(x for x in (c["group_part"], c["group_vol"]) if x)
