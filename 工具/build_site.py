@@ -97,6 +97,9 @@ def main():
     shutil.copy(Path(__file__).parent / "site" / "style.css", OUT / "style.css")
     shutil.copy(Path(__file__).parent / "site" / "app.js", OUT / "app.js")
     (OUT / ".nojekyll").write_text("")
+    trailer = ROOT / "预告片" / "景_预告片.mp4"
+    if trailer.exists():
+        shutil.copy(trailer, OUT / "trailer.mp4")
 
     md = markdown.Markdown(extensions=["extra"])
     total = sum(c["chars"] for c in chapters)
@@ -189,6 +192,10 @@ def main():
       <p class="stat">三部　十三卷　六十六章　另有序章、尾声、后记　·　约 {total/10000:.1f} 万字</p>
       <p class="cta"><a href="000.html" class="btn">从序章读起</a><a href="#" class="btn ghost" id="resume" hidden>继续上次阅读</a></p>
     </div>
+  </section>
+  <section class="trailer">
+    <video src="trailer.mp4" poster="img/Mockup.jpg" controls preload="none" playsinline></video>
+    <p>预告片　32 秒</p>
   </section>
   <section class="vols">
     <a href="#p1"><img src="img/Vol1.jpg" alt="第一卷"><span>第一部　阿罗诃</span></a>

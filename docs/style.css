@@ -91,3 +91,6 @@ a:hover{text-decoration:underline}
   .reader h1{font-size:1.35em;letter-spacing:.1em}
   .crumb{font-size:12px}
 }
+.trailer{margin:64px 0 0;text-align:center}
+.trailer video{width:100%;border-radius:3px;background:#000;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.trailer p{color:var(--ink2);letter-spacing:.3em;font-size:14px;margin:10px 0 0}
