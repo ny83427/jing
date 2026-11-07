@@ -82,7 +82,7 @@ def main():
         d["num"] = num
         if num == "000":
             d["group_part"], d["group_vol"] = None, None
-        elif num in ("067", "099"):
+        elif num >= "067":
             d["group_part"], d["group_vol"] = None, None
         else:
             d["group_part"], d["group_vol"] = cur_part, cur_vol
@@ -108,7 +108,7 @@ def main():
         shutil.copy(trailer, OUT / "trailer.mp4")
 
     md = markdown.Markdown(extensions=["extra"])
-    total = sum(c["chars"] for c in chapters)
+    total = sum(c["chars"] for c in chapters if not ("090" <= c["num"] <= "098"))
 
     # 章节页
     for i, c in enumerate(chapters):
