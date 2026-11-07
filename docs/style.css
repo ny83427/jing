@@ -6,6 +6,7 @@
 }
 body.dark{--paper:#1d1b18; --paper2:#25221e; --ink:#d9d0c0; --ink2:#958a7a; --line:#3a352e; --accent:#c4a571}
 *{box-sizing:border-box}
+[hidden]{display:none !important}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
 a{color:var(--accent);text-decoration:none}
