@@ -139,7 +139,7 @@ def main():
 <header class="bar">
   <a href="index.html" class="brand">景</a>
   <span class="crumb">{html.escape(crumbs)}</span>
-  <span class="tools"><button data-act="smaller" title="字号减小">A−</button><button data-act="bigger" title="字号加大">A＋</button><button data-act="dark" title="日间/夜间">◐</button></span>
+  <span class="tools"><button id="tts-btn" title="朗读本章" hidden>▶ 朗读</button><button data-act="smaller" title="字号减小">A−</button><button data-act="bigger" title="字号加大">A＋</button><button data-act="dark" title="日间/夜间">◐</button></span>
 </header>
 <main class="reader" data-slug="{c['slug']}" data-title="{html.escape(c['title'])}">
   {head_part}
@@ -151,6 +151,16 @@ def main():
   <p class="ver">{html.escape(c['version'])}　·　本章约 {c['chars']:,} 字</p>
   {nav}
 </main>
+<div id="tts-bar" class="tts-bar" hidden>
+  <button data-tts="prev" title="上一段">⏮</button>
+  <button data-tts="toggle" class="tts-main" title="播放/暂停">❚❚</button>
+  <button data-tts="next" title="下一段">⏭</button>
+  <button data-tts="stop" title="停止">■</button>
+  <label>语速<select data-tts="rate"><option value="0.8">0.8×</option><option value="1" selected>1.0×</option><option value="1.2">1.2×</option><option value="1.5">1.5×</option><option value="1.8">1.8×</option></select></label>
+  <label class="tts-voice">声音<select data-tts="voice"></select></label>
+  <label class="tts-auto"><input type="checkbox" data-tts="auto" checked>读完自动下一章</label>
+  <span class="tts-tip">朗读时点任一段落，可从该段读起</span>
+</div>
 """
         extra = ""
         if prev_c:

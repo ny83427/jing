@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=9145c362">
+<link rel="stylesheet" href="style.css?v=db843191">
 <link rel="icon" href="img/icon.png">
 <link rel="prev" href="092.html"><link rel="next" href="094.html">
 </head>
@@ -17,7 +17,7 @@
 <header class="bar">
   <a href="index.html" class="brand">景</a>
   <span class="crumb"></span>
-  <span class="tools"><button data-act="smaller" title="字号减小">A−</button><button data-act="bigger" title="字号加大">A＋</button><button data-act="dark" title="日间/夜间">◐</button></span>
+  <span class="tools"><button id="tts-btn" title="朗读本章" hidden>▶ 朗读</button><button data-act="smaller" title="字号减小">A−</button><button data-act="bigger" title="字号加大">A＋</button><button data-act="dark" title="日间/夜间">◐</button></span>
 </header>
 <main class="reader" data-slug="093.html" data-title="附录四　东方教会历任牧首">
   
@@ -302,7 +302,17 @@
   <p class="ver">版本 v0.2　最后修改 2026-11-07 18:30（美国中部时间）　状态 修订稿（作者审定）　·　本章约 3,472 字</p>
   <nav class="pn"><a href="092.html" rel="prev">← 附录三　年表</a><a href="index.html#toc" class="up">目录</a><a href="094.html" rel="next">附录五　景教术语与当代基督教术语对照 →</a></nav>
 </main>
+<div id="tts-bar" class="tts-bar" hidden>
+  <button data-tts="prev" title="上一段">⏮</button>
+  <button data-tts="toggle" class="tts-main" title="播放/暂停">❚❚</button>
+  <button data-tts="next" title="下一段">⏭</button>
+  <button data-tts="stop" title="停止">■</button>
+  <label>语速<select data-tts="rate"><option value="0.8">0.8×</option><option value="1" selected>1.0×</option><option value="1.2">1.2×</option><option value="1.5">1.5×</option><option value="1.8">1.8×</option></select></label>
+  <label class="tts-voice">声音<select data-tts="voice"></select></label>
+  <label class="tts-auto"><input type="checkbox" data-tts="auto" checked>读完自动下一章</label>
+  <span class="tts-tip">朗读时点任一段落，可从该段读起</span>
+</div>
 
-<script src="app.js?v=9145c362"></script>
+<script src="app.js?v=db843191"></script>
 </body>
 </html>
