@@ -626,7 +626,7 @@ class S8:
         s.cross = lotus_cross(300)
         s.title = text_img("景", 300, BRUSH, (238, 230, 210), 0, shadow=True)
         s.by = text_img("老铁　CLAUDE　著", 38, SERIF, (200, 186, 160), 0.5)
-        s.sub = text_img("三部　十三卷　长篇历史小说", 32, SERIF, (170, 156, 130), 0.45)
+        s.sub = text_img("三部　十二卷　长篇历史小说", 32, SERIF, (170, 156, 130), 0.45)
         s.url = text_img("ny83427.github.io/jing", 26, SERIF, (140, 128, 108), 0.12, shadow=False)
         s.dust = Dust(90, 11, (230, 200, 150), (0.8, 2), ((-4, 4), (-8, -2)), alpha=(20, 90))
     def frame(s, t, dur):
