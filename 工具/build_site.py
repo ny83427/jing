@@ -160,6 +160,7 @@ def main():
     last_part = last_vol = None
     part_vols = {"第一部": "Vol1", "第二部": "Vol2", "第三部": "Vol3"}
     open_vol = False
+    apps, tails = [], []
     for c in chapters:
         if c["group_part"] != last_part and c["group_part"]:
             if open_vol:
@@ -177,9 +178,8 @@ def main():
                 open_vol = True
             last_vol = c["group_vol"]
         if not c["group_vol"] and c["num"] != "000":
-            if last_part is not None:
-                last_part = None
-                toc.append('<div class="toc-gap"></div>')
+            (apps if "090" <= c["num"] <= "098" else tails).append(c)
+            continue
         li = f'<li><a href="{c["slug"]}">{html.escape(c["title"])}</a><span class="n">{c["chars"]:,}</span></li>'
         if open_vol:
             toc.append(li)
@@ -187,6 +187,20 @@ def main():
             toc.append(f'<ol class="toc-single">{li}</ol>')
     if open_vol:
         toc.append("</ol></section>")
+    if tails or apps:
+        toc.append('<div class="toc-gap"></div><div class="toc-extra">')
+        if tails:
+            toc.append('<section class="toc-vol toc-tail"><h3>尾声　后记</h3><ol>')
+            for c in tails:
+                toc.append(f'<li><a href="{c["slug"]}">{html.escape(c["title"])}</a><span class="n">{c["chars"]:,}</span></li>')
+            toc.append("</ol></section>")
+        if apps:
+            toc.append('<section class="toc-vol toc-app"><h3>附　录</h3><ol>')
+            for c in apps:
+                lab, _, rest = c["title"].partition("　")
+                toc.append(f'<li><a href="{c["slug"]}"><b>{html.escape(lab)}</b><span class="t">{html.escape(rest or lab)}</span></a><span class="n">{c["chars"]:,}</span></li>')
+            toc.append("</ol></section>")
+        toc.append("</div>")
 
     index = f"""
 <header class="bar">

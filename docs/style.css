@@ -65,6 +65,14 @@ a:hover{text-decoration:underline}
 .toc li{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px dotted var(--line)}
 .toc li .n{color:var(--ink2);font-size:12px;font-family:system-ui,sans-serif}
 .toc li a.read::after{content:"　·已读";color:var(--ink2);font-size:12px}
+.toc-extra{display:grid;grid-template-columns:1fr 3fr;gap:0 48px;align-items:start}
+.toc-extra .toc-tail ol{grid-template-columns:1fr}
+.toc-app ol{display:block;columns:2;column-gap:36px}
+.toc-app li{break-inside:avoid}
+.toc-app li a{display:flex;gap:1em;align-items:baseline;min-width:0}
+.toc-app li a b{font-weight:400;color:var(--ink2);white-space:nowrap;flex:none}
+.toc-app li a .t{line-height:1.5}
+.toc-app li .n{flex:none;margin-left:12px}
 .mock{margin:80px 0 20px}
 .mock img{width:100%;border-radius:3px}
 .foot{text-align:center;color:var(--ink2);font-size:13px;margin-top:40px}
@@ -77,6 +85,9 @@ a:hover{text-decoration:underline}
 .gallery figcaption{margin-top:10px;color:var(--ink2);letter-spacing:.2em;font-size:14px}
 
 @media (max-width:720px){
+  .toc-extra{grid-template-columns:1fr;gap:0}
+  .toc-extra .toc-tail ol{grid-template-columns:1fr}
+  .toc-app ol{columns:1}
   :root{--fs:18px}
   .hero{grid-template-columns:1fr;gap:28px}
   .cover-main{max-width:300px;margin:0 auto;display:block}
