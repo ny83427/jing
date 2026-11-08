@@ -44,6 +44,10 @@ def parse(path):
     return dict(part=part, vol=vol, title=title, body=body, version=version, chars=chars)
 
 
+import hashlib
+ASSET_V = hashlib.md5((Path(__file__).parent / "site" / "style.css").read_bytes() + (Path(__file__).parent / "site" / "app.js").read_bytes()).hexdigest()[:8]
+
+
 def page(title, content, extra_head="", body_class=""):
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -54,14 +58,14 @@ def page(title, content, extra_head="", body_class=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v={ASSET_V}">
 <link rel="icon" href="img/icon.png">
 {extra_head}
 </head>
 <body class="{body_class}">
 <script>try{{if(localStorage.getItem('jing-dark')==='1')document.body.classList.add('dark');var fs=localStorage.getItem('jing-fs');if(fs)document.documentElement.style.setProperty('--fs',fs+'px');}}catch(e){{}}</script>
 {content}
-<script src="app.js"></script>
+<script src="app.js?v={ASSET_V}"></script>
 </body>
 </html>
 """
