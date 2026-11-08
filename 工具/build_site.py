@@ -108,7 +108,9 @@ def main():
         shutil.copy(trailer, OUT / "trailer.mp4")
 
     md = markdown.Markdown(extensions=["extra"])
-    total = sum(c["chars"] for c in chapters if not ("090" <= c["num"] <= "098"))
+    total = sum(c["chars"] for c in chapters)
+    n_app = sum(1 for c in chapters if "090" <= c["num"] <= "098")
+    app_cn = "零一二三四五六七八九"[n_app]
 
     # 章节页
     for i, c in enumerate(chapters):
@@ -199,7 +201,7 @@ def main():
       <h1 class="big">景</h1>
       <p class="by">老铁　CLAUDE　著</p>
       <p class="blurb">大明天启三年，西安城外挖出一块唐碑，碑面上还粘着烂透了的麻布。西洋神父读了碑文，认定碑上的人是自己的弟兄，却不知道这些人早被西方教会定为异端。碑上刻得下一千七百多个字，刻不下字背后的人：一个替郭子仪看路的僧人，一个翻经立碑的儿子，一个亲手埋碑的徒孙。</p>
-      <p class="stat">三部　十三卷　六十六章　另有序章、尾声、后记　·　约 {total/10000:.1f} 万字</p>
+      <p class="stat">三部　十三卷　六十六章　另有序章、尾声、后记、附录{app_cn}篇　·　约 {total/10000:.1f} 万字</p>
       <p class="cta"><a href="000.html" class="btn">从序章读起</a><a href="#" class="btn ghost" id="resume" hidden>继续上次阅读</a></p>
     </div>
   </section>
