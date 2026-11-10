@@ -45,6 +45,8 @@ def parse(path):
     version = ""
     if m:
         version = re.sub(r"\*\*(.+?)\*\*", r"\1", "版本" + m.group(1)).strip()
+        # 网页上不显示最后修改时间（2026-11-09 作者要求），只留版本号与状态
+        version = re.sub(r"\s*最后修改.*?（美国中部时间）", "", version).strip()
         body = body[: m.start()]
     chars = len(re.findall(r"[\u4e00-\u9fff]", re.sub(r"!\[[^\]]*\]\([^)]*\)", "", body)))
     return dict(part=part, vol=vol, title=title, body=body, version=version, chars=chars)
@@ -259,7 +261,7 @@ def main():
   <section class="mock">
     <img src="img/Mockup.jpg" alt="三卷本合集">
   </section>
-  <footer class="foot">第一稿 · 文字与版本记录见 <a href="https://github.com/ny83427/jing">GitHub 仓库</a></footer>
+  <footer class="foot">第一稿</footer>
 </main>
 """
     (OUT / "index.html").write_text(page("景｜老铁 CLAUDE 著", index), encoding="utf-8")
