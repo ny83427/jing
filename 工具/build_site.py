@@ -20,6 +20,8 @@ IMG_SRC = ROOT / "封面"
 # 各章开头的碑文题记：作者暂定不在网页上显示（2026-11-09）。正文 Markdown 中保留不动，
 # 日后要显示，把这里改成 True 再重新生成即可。
 SHOW_EPIGRAPH = False
+# 章末"附注"（人名对照、史实说明等）：网页不显示，保证阅读连贯；正文 Markdown 保留（2026-11-09）。
+SHOW_CHAPTER_NOTES = False
 
 def parse(path):
     text = path.read_text(encoding="utf-8")
@@ -126,6 +128,8 @@ def main():
         body_html = md.convert(c["body"])
         if not SHOW_EPIGRAPH:
             body_html = re.sub(r"\A\s*<blockquote>.*?</blockquote>\s*", "", body_html, count=1, flags=re.S)
+        if not SHOW_CHAPTER_NOTES:
+            body_html = re.sub(r"<hr\s*/?>\s*<p>附注[：:].*\Z", "", body_html, flags=re.S)
         body_html = body_html.replace('src="../图片/', 'src="img/fig/')
         body_html = re.sub(r'<p><img alt="([^"]*)" src="([^"]+)" ?/?></p>',
                            r'<figure class="fig"><a href="\2" target="_blank"><img src="\2" alt="\1" loading="lazy"></a><figcaption>\1</figcaption></figure>',
