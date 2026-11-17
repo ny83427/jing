@@ -62,6 +62,7 @@ def page(title, content, extra_head="", body_class=""):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4a0e0b">
 <title>{html.escape(title)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -250,16 +251,16 @@ def main():
     <p>预告片　32 秒</p>
   </section>
   <section class="vols">
-    <a href="#p1"><img src="img/Vol1.jpg" alt="第一卷"><span>第一部　阿罗诃</span></a>
-    <a href="#p2"><img src="img/Vol2.jpg" alt="第二卷"><span>第二部　弥施诃</span></a>
-    <a href="#p3"><img src="img/Vol3.jpg" alt="第三卷"><span>第三部　净风王</span></a>
+    <a href="#p1"><img src="img/Vol1.jpg" alt="第一部"><span>第一部　阿罗诃</span></a>
+    <a href="#p2"><img src="img/Vol2.jpg" alt="第二部"><span>第二部　弥施诃</span></a>
+    <a href="#p3"><img src="img/Vol3.jpg" alt="第三部"><span>第三部　净风王</span></a>
   </section>
   <section class="toc" id="toc">
     <h2 class="toc-head">目　录</h2>
     {''.join(toc)}
   </section>
   <section class="mock">
-    <img src="img/Mockup.jpg" alt="三卷本合集">
+    <img src="img/Mockup.jpg" alt="三部合集">
   </section>
   <footer class="foot">第一稿</footer>
 </main>
@@ -267,9 +268,9 @@ def main():
     (OUT / "index.html").write_text(page("景｜老铁 CLAUDE 著", index), encoding="utf-8")
 
     gallery_items = [
-        ("Main", "总封面"), ("Vol1", "第一卷封面　阿罗诃"), ("Vol2", "第二卷封面　弥施诃"),
-        ("Vol3", "第三卷封面　净风王"), ("Back1", "第一卷封底"), ("Back2", "第二卷封底"),
-        ("Back3", "第三卷封底"), ("Mockup", "三卷本合集"),
+        ("Main", "总封面"), ("Vol1", "第一部封面　阿罗诃"), ("Vol2", "第二部封面　弥施诃"),
+        ("Vol3", "第三部封面　净风王"), ("Back1", "第一部封底"), ("Back2", "第二部封底"),
+        ("Back3", "第三部封底"), ("Mockup", "三部合集"),
     ]
     g = "".join(
         f'<figure class="{"wide" if k=="Mockup" else ""}"><a href="img/{k}.jpg"><img src="img/{k}.jpg" alt="{t}" loading="lazy"></a><figcaption>{t}</figcaption></figure>'
