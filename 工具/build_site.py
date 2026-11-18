@@ -122,8 +122,8 @@ def main():
 
     md = markdown.Markdown(extensions=["extra"])
     total = sum(c["chars"] for c in chapters)
-    n_app = sum(1 for c in chapters if "090" <= c["num"] <= "098")
-    app_cn = "零一二三四五六七八九"[n_app]
+    n_app = sum(1 for c in chapters if "089" <= c["num"] <= "098")
+    app_cn = "零一二三四五六七八九十"[n_app]
 
     # 章节页
     for i, c in enumerate(chapters):
@@ -205,7 +205,7 @@ def main():
                 open_vol = True
             last_vol = c["group_vol"]
         if not c["group_vol"] and c["num"] != "000":
-            (apps if "090" <= c["num"] <= "098" else tails).append(c)
+            (apps if "089" <= c["num"] <= "098" else tails).append(c)
             continue
         li = f'<li><a href="{c["slug"]}">{html.escape(c["title"])}</a><span class="n">{c["chars"]:,}</span></li>'
         if open_vol:
