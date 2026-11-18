@@ -150,3 +150,24 @@ body.dark .tts-cur{background:rgba(196,165,113,.16);box-shadow:0 0 0 .35em rgba(
   .tts-bar select{max-width:9em}
   .tools #tts-btn{padding:3px 7px}
 }
+
+/* 附录二 碑文原文与译文对照（2026-11-17）：两栏等宽、正常换行；窄屏改上下排 */
+@font-face{font-family:"DzLatin";src:local("Georgia"),local("Times New Roman"),local("Noto Serif"),local("DejaVu Serif"),local("Liberation Serif");unicode-range:U+0000-007F,U+0080-024F,U+0300-036F,U+1E00-1EFF,U+02B0-02FF}
+.reader article table.duizhao td.yi{font-family:"DzLatin",var(--serif)}
+.reader article table.duizhao{display:table;table-layout:fixed;width:100%;font-size:.86em;line-height:1.85;overflow:visible}
+.reader article table.duizhao col.yw,.reader article table.duizhao col.yi{width:50%}
+.reader article table.duizhao th{text-align:left;letter-spacing:.2em;font-weight:500;color:var(--ink2);font-size:.85em}
+.reader article table.duizhao td{white-space:normal;word-break:break-word;overflow-wrap:anywhere;padding:.75em .9em;min-width:0}
+.reader article table.duizhao td.yw{font-family:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",var(--serif);font-size:1.06em;letter-spacing:.04em}
+.reader article table.duizhao .zhu{margin-top:.6em;padding-top:.45em;border-top:1px dashed var(--line);font-size:.84em;line-height:1.7;color:var(--ink2)}
+.reader article table.duizhao tr.syr td{background:var(--paper2)}
+.reader article table.duizhao tr.syr td.yw{font-family:Georgia,"Times New Roman",serif;font-size:.9em;letter-spacing:0}
+.reader article table.duizhao .tag{display:inline-block;font-style:normal;font-family:var(--serif);font-size:.72em;letter-spacing:.12em;color:var(--paper);background:var(--accent);padding:0 .45em;margin-right:.5em;border-radius:2px;vertical-align:.1em}
+@media (max-width:720px){
+  .reader article table.duizhao,.reader article table.duizhao tbody,.reader article table.duizhao tr,.reader article table.duizhao td{display:block;width:100%}
+  .reader article table.duizhao thead,.reader article table.duizhao colgroup{display:none}
+  .reader article table.duizhao tr{border:1px solid var(--line);margin-bottom:.9em;border-radius:4px}
+  .reader article table.duizhao td{border:none}
+  .reader article table.duizhao td.yw{padding-bottom:.2em}
+  .reader article table.duizhao td.yi{padding-top:.2em}
+}
