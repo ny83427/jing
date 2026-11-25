@@ -23,6 +23,27 @@ SHOW_EPIGRAPH = False
 # 章末"附注"（人名对照、史实说明等）：网页不显示，保证阅读连贯；正文 Markdown 保留（2026-11-09）。
 SHOW_CHAPTER_NOTES = False
 
+def nianbiao(body_html):
+    """年表：表头含"公元""年号"的表格加 class，单元格加 data-label，供手机端卡片排版。"""
+    def fix(m):
+        t = m.group(0)
+        heads = re.findall(r"<th[^>]*>(.*?)</th>", t)
+        if not (heads[:2] == ["公元", "年号"]):
+            return t
+        t = t.replace("<table>", '<table class="nianbiao">', 1)
+        def row(rm):
+            cells = re.findall(r"<td[^>]*>(.*?)</td>", rm.group(0), flags=re.S)
+            out = []
+            for i, c in enumerate(cells):
+                lab = heads[i] if i < len(heads) else ""
+                cls = ' class="e"' if not c.strip() else ""
+                out.append(f'<td data-label="{lab}"{cls}>{c}</td>')
+            return "<tr>" + "".join(out) + "</tr>"
+        t = re.sub(r"<tr>\s*(<td.*?)</tr>", row, t, flags=re.S)
+        return t
+    return re.sub(r"<table>.*?</table>", fix, body_html, flags=re.S)
+
+
 def parse(path):
     text = path.read_text(encoding="utf-8")
     lines = text.splitlines()
@@ -134,6 +155,7 @@ def main():
         if not SHOW_CHAPTER_NOTES:
             body_html = re.sub(r"<hr\s*/?>\s*<p>附注[：:].*\Z", "", body_html, flags=re.S)
         body_html = body_html.replace('src="../图片/', 'src="img/fig/')
+        body_html = nianbiao(body_html)
         body_html = re.sub(r'<p><img alt="([^"]*)" src="([^"]+)" ?/?></p>',
                            r'<figure class="fig"><a href="\2" target="_blank"><img src="\2" alt="\1" loading="lazy"></a><figcaption>\1</figcaption></figure>',
                            body_html)
